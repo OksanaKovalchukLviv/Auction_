@@ -1,0 +1,30 @@
+﻿@model Auction.WEB.Models.BidWinnerViewModel
+@{
+    Layout = null;
+}
+
+@if (Model != null)
+{
+    <div>
+        <div style="float:left; width: 100px">
+            @Html.Label("Bid Price", Model.BidPrice.ToString())
+        </div>
+        <div style="float:left">
+            @Html.Label("Create DateTime", Model.CreatedDateTime.ToString())
+        </div>
+        <div style="float:left">
+            @Html.Label("E-mail", Model.Email)
+        </div>
+    </div>
+    <div style="clear:left"></div>
+}
+else
+{
+    <div>
+        <div style="float:left; width: 100px">
+            @Html.Label("Nobody bet", "Nobody bet.")
+        </div>
+    </div>
+    <div style="clear:left"></div>
+}
+

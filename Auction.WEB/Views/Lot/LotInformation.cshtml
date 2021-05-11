@@ -1,0 +1,74 @@
+﻿@model Auction.WEB.Models.LotViewModel
+@{
+    ViewBag.Title = "ShowBidsForLot";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ShowBidsForLot</h2>
+
+@Html.Hidden("LotId", Model.LotId)
+@Html.Hidden("Name", Model.Name)
+@Html.Hidden("Description", Model.Description)
+@Html.Hidden("InitialPrice", Model.InitialPrice)
+@Html.Hidden("ExpirationTime", Model.ExpirationTime)
+<div class="form-horizontal" style="float:left">
+
+    <div class="form-group" style="float:left">
+
+        <table border="0">
+            <tr>
+                <td width="150">Name</td>
+                <td witdh="300">@Model.Name</td>
+            </tr>
+            <tr>
+                <td width="150">Description</td>
+                <td width="300">@Model.Description</td>
+            </tr>
+            <tr>
+                <td width="150">Initial Price</td>
+                <td width="300">@Model.InitialPrice</td>
+            </tr>
+            <tr>
+                <td width="150">Expiration Time</td>
+                <td width="300">@Model.ExpirationTime</td>
+            </tr>
+        </table>
+    </div>
+    <div class="form-group" style="float:left">
+        <table>
+            <tr>
+                <td width="300">@Html.Action("BidsForLot", "Lot")</td>
+            </tr>
+        </table>
+    </div>
+    <div style="clear:left"></div>
+
+    @if (Model.Status == 2)
+    {
+        <div class="form-group" style="float:left">
+            <table>
+                <tr>
+                    <td width="200">Bidding is over. Winner bid: </td>
+                    <td width="300">@Html.Action("InformationAboutWinner", "Lot", new { lotId = Model.LotId })</td>
+                </tr>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div style="float:left; width:200px">
+            @Html.ActionLink("Return to My Lots", "LotsOfUser", "Lot")
+        </div>
+        <div style="float: left; width: 100px">
+            @Html.ActionLink("Update", "UpdateLot", "Lot", Model, null)
+        </div>
+        <div style="float: left; width: 100px">
+            @Html.ActionLink("Delete", "DeleteLot", "Lot", Model, null)
+        </div>
+        <div style="clear:left"></div>
+    }
+</div>
+<div style="clear:left"></div>
+
+
+

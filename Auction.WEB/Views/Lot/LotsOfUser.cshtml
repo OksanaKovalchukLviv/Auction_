@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Auction.WEB.Models.LotViewModel>
+@{
+    ViewBag.Title = "LotsOfUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Lots of user</h2>
+@foreach (Auction.WEB.Models.LotViewModel lot in Model)
+{
+    @Html.Hidden("LotId", lot.LotId)
+    @Html.Hidden("Name", lot.Name)
+    @Html.Hidden("Description", lot.Description)
+    @Html.Hidden("InitialPrice", lot.InitialPrice)
+    @Html.Hidden("ExpirationTime", lot.ExpirationTime)
+    <table border="0">
+        <tr>
+            <td width="150">Name</td>
+            <td witdh="300">@lot.Name</td>
+            @if (DateTime.Now < lot.ExpirationTime)
+            {
+                <td rowspan="4" width="150">@Html.ActionLink("Details", "LotInformation", "Lot", lot, null)</td>
+                <td rowspan="4" width="150">@Html.ActionLink("Update", "UpdateLot", "Lot", lot, null)</td>
+                <td rowspan="4" width="150">@Html.ActionLink("Delete", "DeleteLot", "Lot", lot, null)</td>
+            }
+            else
+            {
+                <td rowspan="4" width="150">@Html.Label("Bidding is over")</td>
+                <td rowspan="4" width="150">@Html.ActionLink("Details", "LotInformation", "Lot", lot, null)</td>
+            }
+
+        </tr>
+        <tr>
+            <td width="150">Description</td>
+            <td width="300">@lot.Description</td>
+        </tr>
+        <tr>
+            <td width="150">Initial Price</td>
+            <td width="300">@lot.InitialPrice</td>
+        </tr>
+        <tr>
+            <td width="150">Expiration Time</td>
+            <td width="300">@lot.ExpirationTime</td>
+        </tr>
+    </table>
+    <hr style="height: 1px;">
+}

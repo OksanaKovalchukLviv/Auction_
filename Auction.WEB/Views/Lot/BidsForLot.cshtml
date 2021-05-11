@@ -1,0 +1,25 @@
+﻿@model List<Auction.WEB.Models.BidsForLotViewModel>
+@{
+    Layout = null;
+}
+
+<div  style="float:left; width: 400px">
+    <div style="float:left; width: 100px">
+        @Html.Label("Bid Price")
+    </div>
+    <div style="float:left">
+        @Html.Label("Create DateTime")
+    </div>
+    <div style="clear:left"></div>
+    @foreach (Auction.WEB.Models.BidsForLotViewModel bid in Model)
+    {
+        <div style="float:left; width: 100px">
+            @Html.Label("Bid Price", bid.BidPrice.ToString())
+        </div>
+        <div style="float:left">
+            @Html.Label("Create DateTime", bid.CreatedDateTime.ToString())
+        </div>
+        <div style="clear:left"></div>
+    }
+</div>
+<div style="clear:left"></div>

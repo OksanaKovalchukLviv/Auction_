@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Auction.WEB.Models.LotViewModel>
+@{
+    ViewBag.Title = "AllLots";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AllLots</h2>
+@foreach (Auction.WEB.Models.LotViewModel lot in Model)
+{
+    using (Html.BeginForm("MakeBid", "Lot", FormMethod.Post))
+    {
+        @Html.Hidden("LotId", lot.LotId)
+        @Html.Hidden("Name", lot.Name)
+        @Html.Hidden("Description", lot.Description)
+        @Html.Hidden("InitialPrice", lot.InitialPrice)
+        @Html.Hidden("ExpirationTime", lot.ExpirationTime)
+
+        <table border="0">
+            <tr>
+                <td width="150">Name</td>
+                <td witdh="300">@lot.Name</td>
+                
+                <td rowspan="4" width="300">
+                    @if (DateTime.Now < @lot.ExpirationTime)
+                    {
+                    <input type="submit" value="Make a bid" class="btn btn-default" />
+
+                    }
+                    else
+                    {
+                    @Html.Label("Bidding is over")
+                    }
+                </td>
+            </tr>
+            <tr>
+                <td width="150">Description</td>
+                <td width="300">@lot.Description</td>
+            </tr>
+            <tr>
+                <td width="150">Initial Price</td>
+                <td width="300">@lot.InitialPrice</td>
+            </tr>
+            <tr>
+                <td width="150">Expiration Time</td>
+                <td width="300">@lot.ExpirationTime</td>
+            </tr>
+        </table>
+        <hr style="height: 1px;">
+    }
+}
+

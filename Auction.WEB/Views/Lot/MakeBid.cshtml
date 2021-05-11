@@ -1,0 +1,65 @@
+﻿@model Auction.WEB.Models.BidViewModel
+<h2>MakeBid</h2>
+<div class="form-horizontal" style="float:left">
+
+    <div class="form-group" style="float:left">
+
+        <table border="0">
+            <tr>
+                <td width="150">Name</td>
+                <td witdh="300">@Model.Name</td>
+            </tr>
+            <tr>
+                <td width="150">Description</td>
+                <td width="300">@Model.Description</td>
+            </tr>
+            <tr>
+                <td width="150">Initial Price</td>
+                <td width="300">@Model.InitialPrice</td>
+            </tr>
+            <tr>
+                <td width="150">Expiration Time</td>
+                <td width="300">@Model.ExpirationTime</td>
+            </tr>
+        </table>
+    </div>
+    <div class="form-group" style="float:left">
+        <table>
+            <tr>
+                <td width="300">@Html.Action("BidsForLot", "Lot")</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div style="clear:left"></div>
+<div></div>
+
+@if (DateTime.Now < Model.ExpirationTime)
+{
+
+    using (Html.BeginForm("MakeBid", "Bid", FormMethod.Post))
+    {
+
+        <div class="form-horizontal">
+            <input type="hidden" id="LotId" name="LotId" value=@Model.LotId>
+            @Html.Hidden("InitialPrice", Model.InitialPrice)
+            <div class="form-group">
+                @Html.LabelFor(model => model.BidPrice, "Set your price", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.BidPrice, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Set" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+
+{
+    @Html.Label("Bidding is over")
+}

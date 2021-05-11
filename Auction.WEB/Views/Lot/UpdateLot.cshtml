@@ -1,0 +1,49 @@
+﻿@model Auction.WEB.Models.LotViewModel
+@{
+    ViewBag.Title = "UpdateLot";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>UpdateLot</h2>
+@using (Html.BeginForm("UpdateLotPost", "Lot", FormMethod.Post))
+{
+    @Html.Hidden("LotId", Model.LotId);
+    @Html.Hidden("CreatedBy", Model.CreatedBy);
+    @Html.Hidden("ExpirationTime", Model.ExpirationTime);
+
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, "Name", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, "Description", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.InitialPrice, "Initial Price", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.InitialPrice, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LotTime, "Lot time (5-30 min)", new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.LotTime, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Update a lot" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}

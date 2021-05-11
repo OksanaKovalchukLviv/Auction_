@@ -1,0 +1,490 @@
+{
+	"info": {
+		"_postman_id": "04befa07-5907-4a49-95bc-8967f8f398f1",
+		"name": "Lot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "NewLot",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44359/Lot/NewLot",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44359",
+					"path": [
+						"Lot",
+						"NewLot"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NewLot",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "form-data",
+						"value": "body",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Name",
+							"value": "mobile phone",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "SAMSUNG",
+							"type": "text"
+						},
+						{
+							"key": "InitialPrice",
+							"value": "5000",
+							"type": "text"
+						},
+						{
+							"key": "LotTime",
+							"value": "30",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:44359/Lot/NewLot",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44359",
+					"path": [
+						"Lot",
+						"NewLot"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AllLots",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44359/Lot/AllLots",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44359",
+					"path": [
+						"Lot",
+						"AllLots"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MakeBid",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44359/Lot/MakeBid?lotId=40",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44359",
+					"path": [
+						"Lot",
+						"MakeBid"
+					],
+					"query": [
+						{
+							"key": "lotId",
+							"value": "40"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LotsOfUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44359/Lot/LotsOfUser",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44359",
+					"path": [
+						"Lot",
+						"LotsOfUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LotInformation",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44359/Lot/LotInformation?LotId=6021&Name=bottle&Description=for water&InitialPrice=300.00",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44359",
+					"path": [
+						"Lot",
+						"LotInformation"
+					],
+					"query": [
+						{
+							"key": "LotId",
+							"value": "6021"
+						},
+						{
+							"key": "Name",
+							"value": "bottle"
+						},
+						{
+							"key": "Description",
+							"value": "for water"
+						},
+						{
+							"key": "InitialPrice",
+							"value": "300.00"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateLot",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44359/Lot/UpdateLot",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44359",
+					"path": [
+						"Lot",
+						"UpdateLot"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateLotPost",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Name",
+							"value": "mobile phone",
+							"type": "text"
+						},
+						{
+							"key": "Description",
+							"value": "Samsung",
+							"type": "text"
+						},
+						{
+							"key": "InitialPrice",
+							"value": "4000",
+							"type": "text"
+						},
+						{
+							"key": "LotTime",
+							"value": "30",
+							"type": "text"
+						},
+						{
+							"key": "LotId",
+							"value": "6022",
+							"type": "text"
+						},
+						{
+							"key": "CreatedBy",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://localhost:44359/Lot/UpdateLotPost",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44359",
+					"path": [
+						"Lot",
+						"UpdateLotPost"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteLot",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44359/Lot/DeleteLot?LotId=6024&Name=Зошит&Description=в клітинку 96 сторінок&InitialPrice=20&CreatedBy=1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44359",
+					"path": [
+						"Lot",
+						"DeleteLot"
+					],
+					"query": [
+						{
+							"key": "LotId",
+							"value": "6024"
+						},
+						{
+							"key": "Name",
+							"value": "Зошит"
+						},
+						{
+							"key": "Description",
+							"value": "в клітинку 96 сторінок"
+						},
+						{
+							"key": "InitialPrice",
+							"value": "20"
+						},
+						{
+							"key": "CreatedBy",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LotsForBids",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44359/Lot/LotsForBids",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44359",
+					"path": [
+						"Lot",
+						"LotsForBids"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "InformationAboutWinner",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:44359/Lot/InformationAboutWinner?lotId=6021",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44359",
+					"path": [
+						"Lot",
+						"InformationAboutWinner"
+					],
+					"query": [
+						{
+							"key": "lotId",
+							"value": "6021"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
