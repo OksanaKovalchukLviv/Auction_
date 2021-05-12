@@ -1,0 +1,445 @@
+openapi: 3.0.0
+info:
+  description: |
+    This is an Auction  server.  You can find
+    out more about Swagger at
+    [http://swagger.io](http://swagger.io) or on
+    [irc.freenode.net, #swagger](http://swagger.io/irc/).
+  version: "1.0.0"
+  title: Swagger Auction
+  termsOfService: 'http://swagger.io/terms/'
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/OksanaKovalchukLviv/Auction/1.0.0
+  - url: 'https://petstore.swagger.io/v2'
+paths:
+  /Users:
+    post:
+      tags:
+        - User
+      summary: Create user
+      description: This can only be done by the logged in user.
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        default:
+          description: successful operation
+  '/Users/{userId}':
+    get:
+      tags:
+        - User
+      summary: Get user by user Id
+      operationId: getUserById
+      parameters:
+        - name: userId
+          in: path
+          description: The Id that needs to be fetched. Use 1 for testing.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+    put:
+      tags:
+        - User
+      summary: Updated user
+      description: This can only be done by the logged in user.
+      operationId: updateUser
+      parameters:
+        - name: userId
+          in: path
+          description: Id that need to be updated
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid user supplied
+        '404':
+          description: User not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        description: Updated user object
+        required: true
+    delete:
+      tags:
+        - User
+      summary: Delete user
+      description: This can only be done by the logged in user.
+      operationId: deleteUser
+      parameters:
+        - name: userId
+          in: path
+          description: The Id that needs to be deleted
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+  /Login:
+    get:
+      tags:
+        - Auth
+      summary: Logs user into the system
+      operationId: loginUser
+      parameters:
+        - name: Email
+          in: query
+          description: E-mail for login
+          required: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: The password for login in clear text
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          headers:
+            X-Rate-Limit:
+              description: calls per hour allowed by the user
+              schema:
+                type: integer
+                format: int32
+            X-Expires-After:
+              description: date in UTC when token expires
+              schema:
+                type: string
+                format: date-time
+          content:
+            application/json:
+              schema:
+                type: string
+            application/xml:
+              schema:
+                type: string
+        '400':
+          description: Invalid username/password supplied
+  /Logout:
+    get:
+      tags:
+        - Auth
+      summary: Logs out current logged in user session
+      operationId: logoutUser
+      responses:
+        default:
+          description: successful operation
+  /Lots/GetAllLots:
+    get:
+      tags:
+        - Lot
+      summary: Get all lots
+      operationId: ListOfAllLots
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lot'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Lot'
+        '400':
+          description: Invalid status value
+      security:
+        - petstore_auth:
+            - 'write:lots'
+            - 'read:lots'
+  /Lots:
+    post:
+      tags:
+        - Lot
+      summary: Add a new lot
+      operationId: addLot
+      responses:
+        '405':
+          description: Invalid input
+      security:
+        - petstore_auth:
+            - 'write:lots'
+            - 'read:lots'
+      requestBody:
+        $ref: '#/components/requestBodies/Lot'
+  /Lots/{lotId}:
+    get:
+      tags:
+        - Lot
+      summary: Get lot by LotId
+      operationId: getLotById
+      parameters:
+        - name: lotId
+          in: path
+          description: The Id that needs to be fetched. Use 1 for testing.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: Lot not found
+    put:
+      tags:
+        - Lot
+      summary: Updated lot
+      description: This can only be done by the logged in user.
+      operationId: updateLot
+      parameters:
+        - name: lotId
+          in: path
+          description: Id that need to be updated
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid lot supplied
+        '404':
+          description: Lot not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        description: Updated user object
+        required: true
+    delete:
+      tags:
+        - Lot
+      summary: Delete lot
+      description: This can only be done by the logged in user and lot doesn't have any bid
+      operationId: deleteLot
+      parameters:
+        - name: lotId
+          in: path
+          description: The Id that needs to be deleted
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: User not found
+      security:
+        - petstore_auth:
+            - 'write:lots'
+            - 'read:lots'
+  /Lots/{lotId}/History:
+    get:
+      tags:
+        - Lot
+      summary: Get history of bids by LotId
+      operationId: getBidArrayByLotId
+      parameters:
+        - name: lotId
+          in: path
+          description: The Id that needs to be fetched. Use 1 for testing.
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid username supplied
+        '404':
+          description: Lot not found
+  /Bids:
+    post:
+      tags:
+        - Bid
+      summary: Add a new bid
+      operationId: addBid
+      responses:
+        '405':
+          description: Invalid input
+      security:
+        - petstore_auth:
+            - 'write:lots'
+            - 'read:lots'
+      requestBody:
+        $ref: '#/components/requestBodies/Lot'
+  /Bids/{bidId}:
+    get:
+      tags:
+        - Bid
+      summary: Get lot by LotId
+      operationId: getBidById
+      parameters:
+        - name: bidId
+          in: path
+          description: The Id that needs to be fetched. Use 1 for testing.
+          required: true
+          schema:
+            type: integer
+      responses:
+        '405':
+          description: Invalid input
+externalDocs:
+  description: Find out more about Swagger
+  url: 'http://swagger.io'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        UserId:
+          type: integer
+          format: int64
+        Email:
+          type: string
+        Password:
+          type: string
+        Balance:
+          type: number
+          format: decimal
+        FrozenBalance:
+          type: number
+        GetLetters:
+          type: boolean
+        CreatedBy:
+          type: integer
+          format: int64
+        CreatedDateTime:
+          type: string
+        ModifiedBy:
+          type: integer
+          format: int64
+        ModifiedDateTime:
+          type: string
+          description: User Status
+      xml:
+        name: User
+    Lot:
+      type: object
+      properties:
+        LotId:
+          type: integer
+          format: int64
+        Name:
+          type: string
+        Description:
+          type: string
+        InitialPrice:
+          type: number
+        ExpirationTime:
+          type: string
+        CreatedBy:
+          type: integer
+          format: int64
+        CreatedDateTime:
+          type: string
+        ModifiedBy:
+          type: integer
+          format: int64
+        ModifiedDateTime:
+          type: string
+          description: Lot Status
+      xml:
+        name: Lot
+    Bid:
+      type: object
+      properties:
+        BidId:
+          type: integer
+          format: int64
+        LotId:
+          type: integer
+          format: int64
+        CreatedBy:
+          type: integer
+          format: int64
+        CreatedDateTime:
+          type: string
+        BidPrice:
+          type: number
+          description: Bid Status
+      xml:
+        name: Bid
+  requestBodies:
+    Lot:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Lot'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Lot'
+      description: Lot object that needs to be added to the store
+      required: true
+    UserArray:
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/User'
+      description: List of user object
+      required: true
+  securitySchemes:
+    petstore_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: 'http://auctionstore.swagger.io/oauth/dialog'
+          scopes:
+            'write:lots': modify lots in your account
+            'read:lots': read your lots
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
