@@ -150,19 +150,15 @@ namespace Auction.WEB.Controllers
 
         [AuthAttribute]
         [HttpGet]
-        public ActionResult DeleteLot(LotViewModel lotViewModel)
+        public ActionResult DeleteLot(int lotId)
         {
             LotService ls = new LotService();
 
-            var configls = new MapperConfiguration(cfg => cfg.CreateMap<LotViewModel, LotDTO>());
-            var mapperls = new Mapper(configls);
-            var lotDTO = mapperls.Map<LotDTO>(lotViewModel);
-
-            BLLMethodResult result = ls.DeleteLot(lotDTO);
+            BLLMethodResult result = ls.DeleteLot(lotId);
 
             if (result.Result == 0)
             {
-                return RedirectToAction("LotsOfUser", "Lot", lotViewModel);
+                return RedirectToAction("LotsOfUser", "Lot");
             }
             else
             {

@@ -188,15 +188,15 @@ namespace Auction.BLL.Services
             return result;
         }
 
-        public BLLMethodResult DeleteLot(LotDTO lotDTO)
+        public BLLMethodResult DeleteLot(int lotId)
         {
             BLLMethodResult result = new BLLMethodResult();
             try
             {
-                IEnumerable<BidDTO> bidsForLot = AllBidsForLot(lotDTO.LotId);
+                IEnumerable<BidDTO> bidsForLot = AllBidsForLot(lotId);
                 if (bidsForLot.Count() == 0)
                 {
-                    Lot lot = efu.Lots.Get(lotDTO.LotId);
+                    Lot lot = efu.Lots.Get(lotId);
                     efu.Lots.Delete(lot.LotId);
                     result.Result = 0;
                     result.Message = "Your lot has been deleted";

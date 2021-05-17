@@ -13,7 +13,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
-							"  pm.response.to.have.status(200);\r",
+							"    pm.response.to.have.status(200);\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -22,17 +22,23 @@
 			],
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "form-data",
+						"value": "body",
+						"type": "text"
+					}
+				],
 				"url": {
-					"raw": "https://localhost:44359/User/Register",
+					"raw": "https://localhost:44359/Lot/NewLot",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
 					"port": "44359",
 					"path": [
-						"User",
-						"Register"
+						"Lot",
+						"NewLot"
 					]
 				}
 			},
@@ -46,8 +52,15 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Your registration is successful\", function () {\r",
-							"   pm.response.to.have.status(200);\r",
+							"    if (pm.request.body.formdata.get(\"Password\") == pm.request.body.formdata.get(\"ConfirmPassword\"))\r",
+							"    {\r",
+							"        pm.globals.set(\"Email\", pm.request.body.formdata.get(\"Email\"));\r",
+							"        pm.globals.set(\"Password\", pm.request.body.formdata.get(\"Password\"));\r",
+							"        pm.response.to.have.status(200);\r",
+							"    }\r",
 							"});\r",
+							"console.log(pm.request.body.formdata.get(\"Email\")) ;\r",
+							"console.log(pm.request.body.formdata.get(\"Password\")) ;\r",
 							""
 						],
 						"type": "text/javascript"
@@ -68,17 +81,17 @@
 					"formdata": [
 						{
 							"key": "Email",
-							"value": "oksana.kovalchuk.lviv+11@gmail.com",
+							"value": "oksana.kovalchuk.lviv22@gmail.com",
 							"type": "text"
 						},
 						{
 							"key": "Password",
-							"value": "1111",
+							"value": "2222",
 							"type": "text"
 						},
 						{
 							"key": "ConfirmPassword",
-							"value": "1111",
+							"value": "2222",
 							"type": "text"
 						},
 						{
@@ -143,20 +156,13 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"var responseJson = {\r",
-							"\"Email\":\"somebody@gmail.com\",   //change this Email\r",
-							"\"Password\":\"3333\"\r",
-							"}\r",
-							"\r",
-							"pm.globals.set(\"Email\", \"somebody@gmail.com\");\r",
-							"pm.globals.set(\"Password\", \"3333\");\r",
-							"\r",
-							"pm.test(\"Your login is successful\", function () \r",
-							"{ \r",
-							"    pm.expect(responseJson.Email).to.eql(pm.globals.get('Email'));\r",
-							"    pm.expect(responseJson.Password).to.eql(pm.globals.get('Password'));\r",
+							" pm.test(\"Status code is 200\", function () {\r",
+							"    pm.environment.set('Email', pm.cookies.get('Email'));\r",
+							"    pm.environment.set('UserId', pm.cookies.get('UserId'));\r",
 							"    pm.response.to.have.status(200);\r",
-							"})"
+							" });\r",
+							" console.log(pm.cookies.get('Email'));\r",
+							" console.log(pm.cookies.get('UserId'));"
 						],
 						"type": "text/javascript"
 					}
@@ -170,7 +176,7 @@
 					"formdata": []
 				},
 				"url": {
-					"raw": "https://localhost:44359/Auth/Login?Email=somemail@gmail.com&Password=4444",
+					"raw": "https://localhost:44359/Auth/Login?Email={{Email}}&Password={{Password}}",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -183,11 +189,11 @@
 					"query": [
 						{
 							"key": "Email",
-							"value": "somemail@gmail.com"
+							"value": "{{Email}}"
 						},
 						{
 							"key": "Password",
-							"value": "4444"
+							"value": "{{Password}}"
 						}
 					]
 				}
@@ -201,9 +207,13 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
+							" pm.test(\"Status code is 200\", function () {\r",
+							"    pm.environment.set('Email', pm.cookies.get('Email'));\r",
+							"    pm.environment.set('UserId', pm.cookies.get('UserId'));\r",
 							"    pm.response.to.have.status(200);\r",
-							"});"
+							" });\r",
+							" console.log(pm.cookies.get('Email'));\r",
+							" console.log(pm.cookies.get('UserId'));"
 						],
 						"type": "text/javascript"
 					}
